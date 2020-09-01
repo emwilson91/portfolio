@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Capstone Report - Ethan Wilson">
+    <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+    <meta name="author" content="Ethan Wilson">
+    <title>Capstone 2 - Movie Database</title>
+
+    <!-- Include JQuery to simplify AJAX call - See https://www.w3schools.com/jquery/jquery_get_started.asp -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <p>Enter Movie Name: <input type="text" id="moviename"></p>
+    
+    <!-- Run the MoveSearch function when the button is clicked - See https://www.w3schools.com/js/js_events.asp-->
+    <p><button onclick="MovieSearch()">Search for Movie</button></p>
+
+    
+    <div id="url1"></div>
+    <div id="title0"></div>
+    <img id="image0">
+    <div id="title1"></div>
+    <img id="image1">
+    <div id="title2"></div>
+    <img id="image2">
+    <div id="title3"></div>
+    <img id="image3">
+    <div id="title4"></div>
+    <img id="image4">
+    <div id="title5"></div>
+    <img id="image5">
+    <div id="title6"></div>
+    <img id="image6">
+    <div id="title7"></div>
+    <img id="image7">
+    <div id="title8"></div>
+    <img id="image8">
+    <div id="title9"></div>
+    <img id="image9">
+    <div id="title10"></div>
+    <img id="image10">
+    <div id="title11"></div>
+    <img id="image11">
+    <div id="title12"></div>
+    <img id="image12">
+    <div id="title13"></div>
+    <img id="image13">
+    <div id="title14"></div>
+    <img id="image14">
+    <div id="title15"></div>
+    <img id="image15">
+    <div id="title16"></div>
+    <img id="image16">
+    <div id="title17"></div>
+    <img id="image17">
+    <div id="title18"></div>
+    <img id="image18">
+    <div id="title19"></div>
+    <img id="image19">
+    <div id="title20"></div>
+    <img id="image20">
+    <div id="title21"></div>
+    <img id="image21">
+    <div id="title22"></div>
+    <img id="image22">
+    <div id="title23"></div>
+    <img id="image23">
+    <div id="title24"></div>
+    <img id="image24">
+
+<script>
+    
+/* Example URL for AJAX Call 
+var myURL = "https://api.themoviedb.org/3/search/movie?api_key=1c3df5b73705f054ad8dfe8bc03f7f33&language=en-US&query=Jack%20Reacher&page=1&include_adult=false";
+*/
+
+function MovieSearch() {
+    
+    /* Get the movie name for the form */
+    var moviename = document.getElementById("moviename").value;
+    
+    /* Build up the parameters for the URL */
+    var api_key = "1c3df5b73705f054ad8dfe8bc03f7f33";
+    var language = "en-US";
+    var page = "1";
+    var include_adult = "false";
+    var query = encodeURI(moviename);  /* encode the movename since it might have blanks */  
+    var myURL = "https://api.themoviedb.org/3/search/movie?api_key=" + api_key + "&language=" + language + "&query=" + query + "&page="  + page + "&include_adult=" + include_adult;
+
+    /* Display the URL */
+    document.getElementById("url1").innerHTML = myURL;
+    
+    /* We will use AJAX to access the database, and JQuery to simplify the call */
+    /* See:
+        https://www.w3schools.com/js/js_ajax_intro.asp         - the entire module
+        https://www.w3schools.com/jquery/default.asp           - the entire module
+        https://www.w3schools.com/jquery/jquery_ajax_intro.asp - the entire module
+    */
+    
+    /* AJAX Method - Use GET since the parameters are in the URL */
+    var myMethod = "GET";
+
+    /* Make sure the document is ready */
+    $(document).ready(function() { 
+
+    /* Perform AJAX call - Pass to it the Method (GET) and the URL*/
+    $.ajax({
+      method: myMethod,
+      url: myURL
+    })
+
+        /* AJAX complete - result is in msg */
+        .done(function(msg) {
+
+        /* Your code to process the result goes here */          
+
+        /* Loop through the first 25 results */
+            for (i = 0; i < 25; i++) {
+                
+                /* Display the result */
+                if (i < msg.results.length) {
+
+                    /* Set the Title to Visible and set title to value in database */
+                    document.getElementById("title" + i).style.display = "block";
+                    document.getElementById("title" + i).innerHTML = i + ". " + msg.results[i].original_title;
+
+                    /* Some movies don't have a poster - null is returned */
+                    if (msg.results[i].poster_path != null) {
+                        document.getElementById("image" + i).style.display = "block";
+                        document.getElementById("image" + i).src = "https://image.tmdb.org/t/p/w500" + msg.results[i].poster_path;
+                    }
+                    else
+
+                    /* null move poster - don't display a empty value */
+                    {
+                        document.getElementById("image" + i).src = "";       
+                        document.getElementById("image" + i).style.display = "none";
+                    }
+                }
+                else
+                {
+                    /* Less that 25 movies returned - blank out the rest of the values */
+                    document.getElementById("title" + i).innerHTML = "";
+                    document.getElementById("title" + i).style.display = "none";
+                    document.getElementById("image" + i).src = "";
+                    document.getElementById("image" + i).style.display = "none";
+                }
+            }
+        });
+    });
+}
+</script>
+</body>
+</html>
