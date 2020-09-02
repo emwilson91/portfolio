@@ -14,11 +14,11 @@
 
 <body>
     <p>Enter Movie Name: <input type="text" id="moviename"></p>
-    
+
     <!-- Run the MoveSearch function when the button is clicked - See https://www.w3schools.com/js/js_events.asp-->
     <p><button onclick="MovieSearch()">Search for Movie</button></p>
 
-    
+
     <div id="url1"></div>
     <div id="title0"></div>
     <img id="image0">
@@ -72,39 +72,39 @@
     <img id="image24">
 
 <script>
-    
-/* Example URL for AJAX Call 
+
+/* Example URL for AJAX Call
 var myURL = "https://api.themoviedb.org/3/search/movie?api_key=1c3df5b73705f054ad8dfe8bc03f7f33&language=en-US&query=Jack%20Reacher&page=1&include_adult=false";
 */
 
 function MovieSearch() {
-    
+
     /* Get the movie name for the form */
     var moviename = document.getElementById("moviename").value;
-    
+
     /* Build up the parameters for the URL */
-    var api_key = "1c3df5b73705f054ad8dfe8bc03f7f33";
+    var api_key = "20ab01d1e4cf2615dc812916957806eb";
     var language = "en-US";
     var page = "1";
     var include_adult = "false";
-    var query = encodeURI(moviename);  /* encode the movename since it might have blanks */  
+    var query = encodeURI(moviename);  /* encode the movename since it might have blanks */
     var myURL = "https://api.themoviedb.org/3/search/movie?api_key=" + api_key + "&language=" + language + "&query=" + query + "&page="  + page + "&include_adult=" + include_adult;
 
     /* Display the URL */
     document.getElementById("url1").innerHTML = myURL;
-    
+
     /* We will use AJAX to access the database, and JQuery to simplify the call */
     /* See:
         https://www.w3schools.com/js/js_ajax_intro.asp         - the entire module
         https://www.w3schools.com/jquery/default.asp           - the entire module
         https://www.w3schools.com/jquery/jquery_ajax_intro.asp - the entire module
     */
-    
+
     /* AJAX Method - Use GET since the parameters are in the URL */
     var myMethod = "GET";
 
     /* Make sure the document is ready */
-    $(document).ready(function() { 
+    $(document).ready(function() {
 
     /* Perform AJAX call - Pass to it the Method (GET) and the URL*/
     $.ajax({
@@ -115,11 +115,11 @@ function MovieSearch() {
         /* AJAX complete - result is in msg */
         .done(function(msg) {
 
-        /* Your code to process the result goes here */          
+        /* Your code to process the result goes here */
 
         /* Loop through the first 25 results */
             for (i = 0; i < 25; i++) {
-                
+
                 /* Display the result */
                 if (i < msg.results.length) {
 
@@ -136,7 +136,7 @@ function MovieSearch() {
 
                     /* null move poster - don't display a empty value */
                     {
-                        document.getElementById("image" + i).src = "";       
+                        document.getElementById("image" + i).src = "";
                         document.getElementById("image" + i).style.display = "none";
                     }
                 }
