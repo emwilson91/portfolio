@@ -9,13 +9,12 @@
     <link rel="stylesheet" href="assets/style/style.css">
     <script src="assets/scripts/index.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <title>experimental</title>
+    <title>Arkansas Movie Database</title>
   </head>
   <body>
     <header>
       <a href="capstone.html"><img src="assets/images/logo.svg" alt="logo"></a>
       <h1>Arkansas Movie Database</h1>
-      <!--  <a href="#"><img src="assets/images/hamburger.svg" alt="hamburger menu"></a> -->
 
       <div class="menu-wrap">
         <input type="checkbox" class="toggler">
@@ -39,10 +38,10 @@
       <div id="search_area">
         <label for="search">Search Movie:</label>
         <input type="text" id="search" name="search" value="">
-        <input type="button" onclick="search()" value="Submit">
+        <input type="button" onclick="movieSearch()" value="Submit">
       </div>
       <div id="results">
-        <h2>Search our library of Arkansas cinema!</h2>
+        <h2 id="results-header">Search our library of Arkansas cinema!</h2>
         <div id="url1"></div>
         <div id="title0"></div>
         <img id="image0">
