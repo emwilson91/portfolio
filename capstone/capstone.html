@@ -7,15 +7,15 @@
     <meta name="author" content="Ethan Wilson">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/style/style.css">
-    <script src="assets/scripts/index.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="assets/scripts/index.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
     <title>Arkansas Movie Database</title>
   </head>
   <body>
+
     <header>
       <a href="capstone.html"><img src="assets/images/logo.svg" alt="logo"></a>
       <h1>Arkansas Movie Database</h1>
-
       <div class="menu-wrap">
         <input type="checkbox" class="toggler">
         <div class="hamburger"><div></div></div>
@@ -31,70 +31,19 @@
           </div>
         </div>
       </div>
-
-
     </header>
-    <div class="wrapper">
-      <div id="search_area">
-        <label for="search">Search Movie:</label>
-        <input type="text" id="search" name="search" value="">
-        <input type="button" onclick="movieSearch()" value="Submit">
-      </div>
-      <div id="results">
-        <h2 id="results-header">Search our library of Arkansas cinema!</h2>
-        <div id="url1"></div>
-        <div id="title0"></div>
-        <img id="image0">
-        <div id="title1"></div>
-        <img id="image1">
-        <div id="title2"></div>
-        <img id="image2">
-        <div id="title3"></div>
-        <img id="image3">
-        <div id="title4"></div>
-        <img id="image4">
-        <div id="title5"></div>
-        <img id="image5">
-        <div id="title6"></div>
-        <img id="image6">
-        <div id="title7"></div>
-        <img id="image7">
-        <div id="title8"></div>
-        <img id="image8">
-        <div id="title9"></div>
-        <img id="image9">
-        <div id="title10"></div>
-        <img id="image10">
-        <div id="title11"></div>
-        <img id="image11">
-        <div id="title12"></div>
-        <img id="image12">
-        <div id="title13"></div>
-        <img id="image13">
-        <div id="title14"></div>
-        <img id="image14">
-        <div id="title15"></div>
-        <img id="image15">
-        <div id="title16"></div>
-        <img id="image16">
-        <div id="title17"></div>
-        <img id="image17">
-        <div id="title18"></div>
-        <img id="image18">
-        <div id="title19"></div>
-        <img id="image19">
-        <div id="title20"></div>
-        <img id="image20">
-        <div id="title21"></div>
-        <img id="image21">
-        <div id="title22"></div>
-        <img id="image22">
-        <div id="title23"></div>
-        <img id="image23">
-        <div id="title24"></div>
-        <img id="image24">
 
-      </div>
+    <div class="wrapper">
+      <aside>
+        <ul>
+          <li>
+            <input type="button" id="allMovies" value="Movies">
+          </li>
+        </ul>
+      </aside>
+      <section>
+        <div id="results"></div>
+      </section>
     </div>
   </body>
 </html>
