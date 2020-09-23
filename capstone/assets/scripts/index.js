@@ -34,8 +34,9 @@ function buildPageAllMovies () {
   document.getElementById("results").innerHTML = "";
   for (i in ar_movies) {
     if (ar_movies[i].poster_path != null) {
+        console.log(ar_movies[i]);
         document.getElementById("results").innerHTML +=
-        `<div class="resultBanner"><a href="#"><img src=
+        `<div class="resultBanner"><a href="ualr.edu?movieid=${ar_movies[i].id}"><img src=
         "https://image.tmdb.org/t/p/w500${ar_movies[i].poster_path}"></a></div>`;
     } else {
       document.getElementById("results").innerHTML +=
