@@ -10,9 +10,9 @@ var pageNumber = "1";
 document.addEventListener("DOMContentLoaded", buildData);
 document.getElementById("allMovies").addEventListener("click", buildPageAllMovies);
 
-
+//uses locally maintained json to call api to build array of movie objects
 function buildData () {
-  fetch('assets/JSON/arkansas_movies.json')
+  fetch('assets/json/arkansas.json')
     .then(r => {
       return r.json();
     })
@@ -30,17 +30,21 @@ function buildData () {
     })
 }
 
+
+//displays all arkansas movies in results div from ar_movies array
 function buildPageAllMovies () {
   document.getElementById("results").innerHTML = "";
   for (i in ar_movies) {
     if (ar_movies[i].poster_path != null) {
-        console.log(ar_movies[i]);
         document.getElementById("results").innerHTML +=
-        `<div class="resultBanner"><a href="ualr.edu?movieid=${ar_movies[i].id}"><img src=
+        `<div class="resultBanner"><a href=
+        "movieDetails.html?movieId=${ar_movies[i].id}" alt=
+        "${ar_movies[i].title}"><img src=
         "https://image.tmdb.org/t/p/w500${ar_movies[i].poster_path}"></a></div>`;
     } else {
       document.getElementById("results").innerHTML +=
-       `<div class="resultNoImage">${ar_movies[i].title}</div>`;
+       `<div class="resultNoImage"><a href=
+       "movieDetails.html?movieId=${ar_movies[i].id}">${ar_movies[i].title}</a></div>`;
     }
   }
 }
