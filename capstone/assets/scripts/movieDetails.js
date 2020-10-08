@@ -2,6 +2,9 @@ const query = window.location.search;
 const urlParams = new URLSearchParams(query);
 const id = urlParams.get("movieId");
 const api_key = "20ab01d1e4cf2615dc812916957806eb";
+const months = ['January', 'February', 'March', 'April', 'May', 'June',
+ 'July', 'August', 'September', 'October', 'November', 'December'];
+var newDate = "";
 var movie;
 var language = "en-US";
 
@@ -18,27 +21,42 @@ function buildPage () {
     })
     .then(data => {
       movie = data;
-      const months = ['January', 'February', 'March', 'April', 'May', 'June',
-       'July', 'August', 'September', 'October', 'November', 'December'];
-      const year = movie.release_date.slice(0, 4);
-      const month = movie.release_date.slice(5, 7);
-      const day = movie.release_date.slice(8, 10);
-      const newDate = `${months[month-1]} ${day}, ${year}`;
-      document.getElementById("movie").innerHTML =
-      `<div id="title">${movie.title}</div>`;
-      document.getElementById("movie").innerHTML += `<div id=
-      "releaseDate">${newDate}</div>`
-      if (movie.poster_path != null) {
-          document.getElementById("movie").innerHTML += `<img src=
-          "https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">`;
-      } else {
-        document.getElementById("movie").innerHTML +=
-        '<div id="noImage">No Image Found.</div>';
+
+      if (movie.release_date != null && movie.release_date != "") {
+        const year = movie.release_date.slice(0, 4);
+        const month = movie.release_date.slice(5, 7);
+        const day = movie.release_date.slice(8, 10);
+        newDate = `${months[month-1]} ${day}, ${year}`;
       }
-      document.getElementById("movie").innerHTML +=
-      `<div id="overview">${movie.overview}</div>`;
-      document.getElementById("movie").innerHTML +=
-      `<div id="runtime">Total Runtime: ${movie.runtime} minutes.</div>`;
+
+      if (movie.poster_path != null && movie.poster_path != "") {
+          document.getElementById("results").innerHTML +=
+          `<div class="resultBanner">${data.title}<a href=
+          "movieDetails.html?movieId=${data.id}" alt=
+          "${data.title}"><img src=
+          "https://image.tmdb.org/t/p/w500${data.poster_path}"></a>${newDate}</div>`;
+      } else {
+        document.getElementById("results").innerHTML +=
+         `<div class="resultNoImage"><a href=
+         "movieDetails.html?movieId=${data.id}">${data.title}</a>${newDate}</div>`;
+      }
+
+      if (movie.overview != null && movie.overview != "") {
+        document.getElementById("results").innerHTML +=
+        `<div id="overview">${movie.overview}</div>`;
+      } else {
+        document.getElementById("results").innerHTML +=
+        `<div id="overview">No overview could be found for this title.</div>`;
+      }
+
+      if (movie.runtime != null && movie.runtime != "") {
+        document.getElementById("results").innerHTML +=
+        `<div id="runtime">Total Runtime: ${movie.runtime} minutes.</div>`;
+      } else {
+        document.getElementById("results").innerHTML +=
+        `<div id="runtime">No runtime could be found for this title.</div>`;
+      }
+
 
       //call api to get cast and post to document
       fetch(`https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=${api_key}`)
@@ -47,17 +65,27 @@ function buildPage () {
         })
         .then(data => {
           if (data.cast != 0) {
-            document.getElementById("movie").innerHTML +=
+            document.getElementById("results").innerHTML +=
             `<ul id="castList"></ul>`;
             for (i in data.cast) {
-              document.getElementById("castList").innerHTML +=
-              `<li class="castMember">${data.cast[i].name} as ${data.cast[i].character}</li>`;
+              if (data.cast[i].profile_path != null && data.cast[i].profile_path != "") {
+                document.getElementById("castList").innerHTML +=
+                `<li class="castMember"><img src=
+                "https://image.tmdb.org/t/p/w500${data.cast[i].profile_path}" alt="${data.cast[i].name}"><a href=
+                "actorDetails.html?actorId=${data.cast[i].id}" alt=
+                "${data.cast[i].name}">${data.cast[i].name}</a> as ${data.cast[i].character}</li>`;
+              } else {
+                document.getElementById("castList").innerHTML +=
+                `<li class="castMember"><a href=
+                "actorDetails.html?actorId=${data.cast[i].id}" alt=
+                "${data.cast[i].name}">${data.cast[i].name}</a> as ${data.cast[i].character}</li>`;
+              }
             }
           } else {
-            document.getElementById("movie").innerHTML +=
+            document.getElementById("results").innerHTML +=
             `<div id="noCast">No Cast could be found for this title.</div>`;
           }
         })
-        
+
     })
 }

@@ -1,6 +1,6 @@
 const api_key = "20ab01d1e4cf2615dc812916957806eb";
 const include_adult = "false";
-var ar_movies = [];
+var ar_actors = [];
 var language = "en-US";
 var page = "1";
 var sort = "popularity.desc";
@@ -16,24 +16,23 @@ function buildData () {
       return r.json();
     })
     .then(data => {
-      for (i in data.movies) {
-        fetch(`https://api.themoviedb.org/3/movie/
-          ${data.movies[i].id}?api_key=${api_key}&language=${language}`)
+      for (i in data.actors) {
+        fetch(`https://api.themoviedb.org/3/person/${data.actors[i].id}?api_key=${api_key}&language=${language}`)
           .then(r => {
             return r.json();
           })
           .then(data => {
-              ar_movies.push(data);
-              if (data.poster_path != null && data.poster_path != "") {
+              ar_actors.push(data);
+              if (data.profile_path != null && data.profile_path != "") {
                   document.getElementById("results").innerHTML +=
-                  `<div class="resultBanner">${data.title}<a href=
-                  "movieDetails.html?movieId=${data.id}" alt=
-                  "${data.title}"><img src=
-                  "https://image.tmdb.org/t/p/w500${data.poster_path}"></a></div>`;
+                  `<div class="resultBanner">${data.name}<a href=
+                  "actorDetails.html?actorId=${data.id}" alt=
+                  "${data.name}"><img src=
+                  "https://image.tmdb.org/t/p/w500${data.profile_path}"></a></div>`;
               } else {
                 document.getElementById("results").innerHTML +=
                  `<div class="resultNoImage"><a href=
-                 "movieDetails.html?movieId=${data.id}">${data.title}</a></div>`;
+                 "actorDetails.html?actorId=${data.id}">${data.name}</a></div>`;
               }
           })
       }
