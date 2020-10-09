@@ -64,6 +64,13 @@ header > a > img {
   max-width: 80%;
 }
 
+#allMoviesList {
+  display: grid;
+  grid-gap: 15px;
+  text-align: center;
+  grid-template-columns: auto auto auto;
+}
+
 #title {
   font-size: 2rem;
 }
@@ -95,6 +102,17 @@ header > a > img {
   margin: 15px;
 }
 
+.resultBanner {
+  display: flex;
+  flex-direction: column;
+  background: #454545;
+  color: white;
+  border-radius: 1em;
+  margin: 15px;
+  padding: 15px;
+  text-align: center;
+}
+
 .resultBanner > a > img{
   max-width: 100%;
   border-radius: 0.5em;
@@ -102,10 +120,15 @@ header > a > img {
 
 .resultNoImage {
   background: #454545;
+  color: white;
   border-radius: 1em;
   margin: 15px;
   padding: 15px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .resultNoImage > a {
@@ -257,17 +280,15 @@ header > a > img {
     clip: rect(0,0,0,0);
     border: 0;
   }
-}
-/*
-@media all and (min-width: 1024px) {
-  .wrapper > div {
-    margin: 15px 100px;
+
+  #allMoviesList{
+    grid-template-columns: auto auto;
   }
+
 }
 
-@media all and (min-width: 1200px) {
-  .wrapper > div {
-    margin: 15px 300px;
+@media all and (max-width: 400px) {
+  #allMoviesList{
+    grid-template-columns: auto;
   }
 }
-*/
