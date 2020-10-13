@@ -1,19 +1,19 @@
-const query = window.location.search;
-const urlParams = new URLSearchParams(query);
-const id = urlParams.get("movieId");
-const api_key = "20ab01d1e4cf2615dc812916957806eb";
-const months = ['January', 'February', 'March', 'April', 'May', 'June',
- 'July', 'August', 'September', 'October', 'November', 'December'];
-var newDate = "";
-var movie;
-var language = "en-US";
-
+"use strict";
 
 document.addEventListener("DOMContentLoaded", buildPage);
 
-
 // this function fills out the document with info from the api
 function buildPage () {
+  const query = window.location.search;
+  const urlParams = new URLSearchParams(query);
+  const id = urlParams.get("movieId");
+  const api_key = "20ab01d1e4cf2615dc812916957806eb";
+  const months = ['January', 'February', 'March', 'April', 'May', 'June',
+   'July', 'August', 'September', 'October', 'November', 'December'];
+  var newDate = "";
+  var movie;
+  var language = "en-US";
+  var i = 0;
   fetch(`https://api.themoviedb.org/3/movie/
     ${id}?api_key=${api_key}&language=${language}`)
     .then(r => {

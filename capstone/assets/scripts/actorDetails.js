@@ -1,15 +1,16 @@
-const query = window.location.search;
-const urlParams = new URLSearchParams(query);
-const id = urlParams.get("actorId");
-const api_key = "20ab01d1e4cf2615dc812916957806eb";
-const months = ['January', 'February', 'March', 'April', 'May', 'June',
- 'July', 'August', 'September', 'October', 'November', 'December'];
-var actor;
-var language = "en-US";
+"use strict";
 
 document.addEventListener("DOMContentLoaded", buildPage);
 
 function buildPage() {
+  const query = window.location.search;
+  const urlParams = new URLSearchParams(query);
+  const id = urlParams.get("actorId");
+  const api_key = "20ab01d1e4cf2615dc812916957806eb";
+  const months = ['January', 'February', 'March', 'April', 'May', 'June',
+   'July', 'August', 'September', 'October', 'November', 'December'];
+  var actor;
+  var language = "en-US";
   fetch(`https://api.themoviedb.org/3/person/${id}?api_key=${api_key}&language=${language}`)
     .then(r => {
       return r.json();
@@ -55,7 +56,7 @@ function buildPage() {
         const newDeathDay = `${months[deathMonth-1]} ${deathDay}, ${deathYear}`;
         document.getElementById("results").innerHTML +=
         `<div id="deathday">Died: ${newDeathDay}</div>`;
-      } 
+      }
 
       if (actor.biography != "" && actor.biography != null) {
         document.getElementById("results").innerHTML +=

@@ -1,16 +1,18 @@
-const api_key = "20ab01d1e4cf2615dc812916957806eb";
-const include_adult = "false";
-var ar_movies = [];
-var language = "en-US";
-var page = "1";
-var sort = "popularity.desc";
-var include_video = "false";
-var pageNumber = "1";
+"use strict";
 
-document.addEventListener("DOMContentLoaded", buildData);
+document.addEventListener("DOMContentLoaded", buildPage);
 
 //use local maintained json to call api; make array of movie objects to build page
-function buildData () {
+function buildPage () {
+  const api_key = "20ab01d1e4cf2615dc812916957806eb";
+  const include_adult = "false";
+  var ar_movies = [];
+  var language = "en-US";
+  var page = "1";
+  var sort = "popularity.desc";
+  var include_video = "false";
+  var pageNumber = "1";
+  var i = 0;
   fetch('assets/json/arkansas.json')
     .then(r => {
       return r.json();
