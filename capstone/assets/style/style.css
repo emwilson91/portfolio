@@ -68,7 +68,14 @@ header > a > img {
   display: grid;
   grid-gap: 15px;
   text-align: center;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto auto auto;
+}
+
+#allActorsList {
+  display: grid;
+  grid-gap: 15px;
+  text-align: center;
+  grid-template-columns: auto auto auto auto;
 }
 
 #title {
@@ -281,14 +288,22 @@ header > a > img {
     border: 0;
   }
 
-  #allMoviesList{
+  #allMoviesList {
+    grid-template-columns: auto auto;
+  }
+
+  #allActorsList {
     grid-template-columns: auto auto;
   }
 
 }
 
 @media all and (max-width: 400px) {
-  #allMoviesList{
+  #allMoviesList {
+    grid-template-columns: auto;
+  }
+
+  #allActorsList {
     grid-template-columns: auto;
   }
 }
