@@ -69,7 +69,7 @@ function buildPage() {
       }
 
 // get and build filmography here
-      fetch(`https://api.themoviedb.org/3/person/${actor.id}/combined_credits?api_key=${api_key}&language=en-US`)
+      fetch(`https://api.themoviedb.org/3/person/${actor.id}/movie_credits?api_key=${api_key}&language=en-US`)
         .then(r => {
           return r.json();
         })
