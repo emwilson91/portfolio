@@ -68,17 +68,34 @@ function buildPage () {
             document.getElementById("results").innerHTML +=
             `<ul id="castList"></ul>`;
             for (i in data.cast) {
-              if (data.cast[i].profile_path != null && data.cast[i].profile_path != "") {
-                document.getElementById("castList").innerHTML +=
-                `<li class="castMember"><img src=
-                "https://image.tmdb.org/t/p/w500${data.cast[i].profile_path}" alt="${data.cast[i].name}"><a href=
-                "actorDetails.html?actorId=${data.cast[i].id}" alt=
-                "${data.cast[i].name}">${data.cast[i].name}</a> as ${data.cast[i].character}</li>`;
+              if (data.cast[i].character != "" && data.cast[i].character != null) {
+                if (data.cast[i].profile_path != null && data.cast[i].profile_path != "") {
+                  document.getElementById("castList").innerHTML +=
+                  `<li class="castMember"><a href=
+                  "actorDetails.html?actorId=${data.cast[i].id}" alt=
+                  "${data.cast[i].name}"><img src=
+                  "https://image.tmdb.org/t/p/w500${data.cast[i].profile_path}" alt=
+                  "${data.cast[i].name}"></a>${data.cast[i].name} as ${data.cast[i].character}</li>`;
+                } else {
+                  document.getElementById("castList").innerHTML +=
+                  `<li class="castMember"><a href=
+                  "actorDetails.html?actorId=${data.cast[i].id}" alt=
+                  "${data.cast[i].name}">${data.cast[i].name}</a> as ${data.cast[i].character}</li>`;
+                }
               } else {
-                document.getElementById("castList").innerHTML +=
-                `<li class="castMember"><a href=
-                "actorDetails.html?actorId=${data.cast[i].id}" alt=
-                "${data.cast[i].name}">${data.cast[i].name}</a> as ${data.cast[i].character}</li>`;
+                if (data.cast[i].profile_path != null && data.cast[i].profile_path != "") {
+                  document.getElementById("castList").innerHTML +=
+                  `<li class="castMember"><a href=
+                  "actorDetails.html?actorId=${data.cast[i].id}" alt=
+                  "${data.cast[i].name}"><img src=
+                  "https://image.tmdb.org/t/p/w500${data.cast[i].profile_path}" alt=
+                  "${data.cast[i].name}"></a>${data.cast[i].name}</li>`;
+                } else {
+                  document.getElementById("castList").innerHTML +=
+                  `<li class="castMember"><a href=
+                  "actorDetails.html?actorId=${data.cast[i].id}" alt=
+                  "${data.cast[i].name}">${data.cast[i].name}</a></li>`;
+                }
               }
             }
           } else {
