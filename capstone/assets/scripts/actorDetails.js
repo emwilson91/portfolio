@@ -10,6 +10,8 @@ function buildPage() {
   const months = ['January', 'February', 'March', 'April', 'May', 'June',
    'July', 'August', 'September', 'October', 'November', 'December'];
   var actor;
+  var filmography;
+  var i = 0;
   var language = "en-US";
   fetch(`https://api.themoviedb.org/3/person/${id}?api_key=${api_key}&language=${language}`)
     .then(r => {
@@ -65,5 +67,30 @@ function buildPage() {
         document.getElementById("results").innerHTML +=
         `<div id="bio">No biography found for actor.</div>`;
       }
+
+// get and build filmography here
+      fetch(`https://api.themoviedb.org/3/person/${actor.id}/combined_credits?api_key=${api_key}&language=en-US`)
+        .then(r => {
+          return r.json();
+        })
+        .then(data => {
+          filmography = data;
+          document.getElementById("results").innerHTML +=
+          `<div id="credits_section">Filmography: </div>`;
+          for (i in filmography.cast) {
+
+              if (filmography.cast[i].poster_path != null && filmography.cast[i].poster_path != "") {
+                  document.getElementById("credits_section").innerHTML +=
+                  `<div class="resultBanner">${filmography.cast[i].title}<a href=
+                  "movieDetails.html?movieId=${filmography.cast[i].id}" alt=
+                  "${filmography.cast[i].title}"><img src=
+                  "https://image.tmdb.org/t/p/w500${filmography.cast[i].poster_path}"></a></div>`;
+              } else {
+                document.getElementById("credits_section").innerHTML +=
+                 `<div class="resultNoImage"><a href=
+                 "movieDetails.html?movieId=${filmography.cast[i].id}">${filmography.cast[i].title}</a>No Image Found.</div>`;
+              }
+          }
+        })
     })
 }
