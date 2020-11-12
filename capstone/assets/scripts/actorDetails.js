@@ -22,13 +22,13 @@ function buildPage() {
 
       if (actor.profile_path != null && actor.profile_path != "") {
           document.getElementById("results").innerHTML +=
-          `<div class="resultBanner">${actor.name}<a href=
+          `<div id="actorBanner">${actor.name}<a href=
           "actorDetails.html?actorId=${actor.id}" alt=
           "${actor.name}"><img src=
           "https://image.tmdb.org/t/p/w500${actor.profile_path}"></a></div>`;
       } else {
         document.getElementById("results").innerHTML +=
-         `<div class="resultNoImage"><a href=
+         `<div id="actorBannerNoImage"><a href=
          "actorDetails.html?actorId=${actor.id}">${actor.name}</a></div>`;
       }
 
@@ -58,6 +58,9 @@ function buildPage() {
         const newDeathDay = `${months[deathMonth-1]} ${deathDay}, ${deathYear}`;
         document.getElementById("results").innerHTML +=
         `<div id="deathday">Died: ${newDeathDay}</div>`;
+      } else {
+        document.getElementById("results").innerHTML +=
+        `<div id="deathday">Died: No date found.</div>`;
       }
 
       if (actor.biography != "" && actor.biography != null) {
@@ -76,19 +79,21 @@ function buildPage() {
         .then(data => {
           filmography = data;
           document.getElementById("results").innerHTML +=
-          `<div id="credits_section">Filmography: </div>`;
+          `<h2> Filmography of ${actor.name}</h2>`;
+          document.getElementById("results").innerHTML +=
+          `<ul id="credits_list"></ul>`;
           for (i in filmography.cast) {
 
               if (filmography.cast[i].poster_path != null && filmography.cast[i].poster_path != "") {
-                  document.getElementById("credits_section").innerHTML +=
-                  `<div class="resultBanner">${filmography.cast[i].title}<a href=
+                  document.getElementById("credits_list").innerHTML +=
+                  `<li class="resultBanner">${filmography.cast[i].title}<a href=
                   "movieDetails.html?movieId=${filmography.cast[i].id}" alt=
                   "${filmography.cast[i].title}"><img src=
-                  "https://image.tmdb.org/t/p/w500${filmography.cast[i].poster_path}"></a></div>`;
+                  "https://image.tmdb.org/t/p/w500${filmography.cast[i].poster_path}"></a></li>`;
               } else {
-                document.getElementById("credits_section").innerHTML +=
-                 `<div class="resultNoImage"><a href=
-                 "movieDetails.html?movieId=${filmography.cast[i].id}">${filmography.cast[i].title}</a>No Image Found.</div>`;
+                document.getElementById("credits_list").innerHTML +=
+                 `<li class="resultNoImage"><a href=
+                 "movieDetails.html?movieId=${filmography.cast[i].id}">${filmography.cast[i].title}</a>No Image Found.</li>`;
               }
           }
         })

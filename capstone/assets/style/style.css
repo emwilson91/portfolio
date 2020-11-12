@@ -12,6 +12,12 @@ body {
   background-color: #a7db81;
 }
 
+h2 {
+  text-align: center;
+  grid-column: 1 / 4;
+  grid-row: 4 / 5;
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -40,16 +46,36 @@ header > a > img {
 }
 
 #results {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   justify-content: space-around;
-  align-items: center;
+  align-content: space-around;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto auto auto;
 }
 
-#results > img {
-  max-width: 100%;
-  border-radius: 0.5em;
-  margin: 15px;
+#actorBanner, #titleBanner, #actorBannerNoImage, #titleBannerNoImage {
+  grid-row: 1 / 4;
+  grid-column: 1 / 2;
+}
+
+#birthday {
+  grid-column: 2 / 4;
+  grid-row: 1 / 2;
+}
+
+#deathday {
+  grid-column: 2 / 4;
+  grid-row: 2 / 3;
+}
+
+#bio, #runtime {
+  grid-column: 2 / 4;
+  grid-row: 3 / 4;
+}
+
+#overview {
+  grid-column: 2 / 4;
+  grid-row: 1 / 3;
 }
 
 #results > div {
@@ -61,7 +87,8 @@ header > a > img {
   padding: 15px;
   display: flex;
   flex-direction: column;
-  max-width: 80%;
+  justify-content: center;
+  box-shadow: 5px 5px 15px black;
 }
 
 #allMoviesList {
@@ -71,6 +98,10 @@ header > a > img {
   grid-template-columns: auto auto auto auto;
 }
 
+#allMoviesList > div {
+  box-shadow: 5px 5px 15px black;
+}
+
 #allActorsList {
   display: grid;
   grid-gap: 15px;
@@ -78,16 +109,38 @@ header > a > img {
   grid-template-columns: auto auto auto auto;
 }
 
-#title {
-  font-size: 2rem;
+#allActorsList > div {
+  box-shadow: 5px 5px 15px black;
 }
 
 #castList {
   list-style-type: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
+  display: grid;
+  text-align: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column: 1 / 4;
+  grid-row: 5 / 6;
+}
+
+#credits_list {
+  list-style-type: none;
+  display: grid;
+  text-align: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column: 1 / 4;
+  grid-row: 5 / 6;
+}
+
+#credits_list > li {
+  box-shadow: 5px 5px 15px black;
+}
+
+#actorBanner > a > img {
+  max-width: 100%;
+}
+
+#titleBanner > a > img {
+  max-width: 100%;
 }
 
 .castMember {
@@ -101,12 +154,12 @@ header > a > img {
   justify-content: space-around;
   align-items: center;
   text-align: center;
+  box-shadow: 5px 5px 15px black;
 }
 
-.castMember > img {
+.castMember > a > img {
   max-width: 100%;
   border-radius: 0.5em;
-  margin: 15px;
 }
 
 .resultBanner {
@@ -296,6 +349,21 @@ header > a > img {
     grid-template-columns: auto auto;
   }
 
+  #castList {
+    grid-template-columns: auto auto;
+  }
+
+  #credits_list {
+    grid-template-columns: auto auto;
+  }
+
+  #results {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
 }
 
 @media all and (max-width: 400px) {
@@ -305,5 +373,20 @@ header > a > img {
 
   #allActorsList {
     grid-template-columns: auto;
+  }
+
+  #castList {
+    grid-template-columns: auto;
+  }
+
+  #credits_list {
+    grid-template-columns: auto;
+  }
+
+  #results {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
   }
 }

@@ -31,13 +31,13 @@ function buildPage () {
 
       if (movie.poster_path != null && movie.poster_path != "") {
           document.getElementById("results").innerHTML +=
-          `<div class="resultBanner">${data.title}<a href=
+          `<div id="titleBanner">${data.title}<a href=
           "movieDetails.html?movieId=${data.id}" alt=
           "${data.title}"><img src=
           "https://image.tmdb.org/t/p/w500${data.poster_path}"></a>${newDate}</div>`;
       } else {
         document.getElementById("results").innerHTML +=
-         `<div class="resultNoImage"><a href=
+         `<div id="titleBannerNoImage"><a href=
          "movieDetails.html?movieId=${data.id}">${data.title}</a>${newDate}</div>`;
       }
 
@@ -65,6 +65,8 @@ function buildPage () {
         })
         .then(data => {
           if (data.cast != 0) {
+            document.getElementById("results").innerHTML +=
+            `<h2> Cast of ${movie.title} </h2>`;
             document.getElementById("results").innerHTML +=
             `<ul id="castList"></ul>`;
             for (i in data.cast) {
