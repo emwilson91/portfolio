@@ -147,6 +147,17 @@ header > a > img {
   max-width: 100%;
 }
 
+#aboutSection, #aboutList {
+  text-align: center;
+  background: var(--cardColor);
+  color: white;
+  border-radius: 1em;
+  margin: 15px;
+  padding: 35px;
+  box-shadow: 5px 5px 15px black;
+  line-height: 2.5rem;
+}
+
 .castMember {
   color: white;
   border-radius: 1em;
