@@ -158,6 +158,14 @@ header > a > img {
   line-height: 2.5rem;
 }
 
+#attribution {
+  
+}
+
+#attribution > a > img {
+  max-width: 20%;
+}
+
 .castMember {
   color: white;
   border-radius: 1em;
